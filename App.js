@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Form from './components/playform';
+import Games from './components/game-list';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>Play together!</Text>
       <Form />
+      <Games />
     </View>
   );
 }

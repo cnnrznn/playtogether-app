@@ -1,10 +1,21 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
 
-const Form = () => {
+
+
+const Form = (props) => {
+    const submitCallback = props.callback;
+
     const [selectedActivity, setSelectedActivity] = useState();
     const [selectedTime, setSelectedTime] = useState();
+
+    function submitForm() {
+        submitCallback({
+            time: selectedTime,
+            activity: selectedActivity,
+        });
+    }
 
     return (
         <View>
@@ -26,6 +37,10 @@ const Form = () => {
                     <Picker.Item label="2 hours" value={240} />
                 </Picker>
             </View>
+            <Button 
+                onPress={submitForm}
+                title="Go!"
+            />
         </View>
     );
 };
