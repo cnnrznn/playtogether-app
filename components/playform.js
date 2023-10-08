@@ -7,8 +7,8 @@ import { useState } from 'react';
 const Form = (props) => {
     const submitCallback = props.callback;
 
-    const [selectedActivity, setSelectedActivity] = useState();
-    const [selectedTime, setSelectedTime] = useState();
+    const [selectedActivity, setSelectedActivity] = useState("volleyball");
+    const [selectedTime, setSelectedTime] = useState(60);
 
     function submitForm() {
         submitCallback({
@@ -23,7 +23,7 @@ const Form = (props) => {
                 <Text style={styles.col}>Activity:</Text>
                 <Picker
                     selectedValue={selectedActivity}
-                    onValueChange={activity => setSelectedActivity(activity)} >
+                    onValueChange={(activity, index) => setSelectedActivity(activity)} >
                     <Picker.Item label="volleyball" value="volleyball" />
                     <Picker.Item label="run" value="run" />
                 </Picker>
@@ -32,9 +32,9 @@ const Form = (props) => {
                 <Text style={styles.col}>Time:</Text>
                 <Picker
                     selectedValue={selectedTime}
-                    onValueChange={time => setSelectedTime(time)} >
+                    onValueChange={(time, index) => setSelectedTime(time)} >
                     <Picker.Item label="1 hour" value={60} />
-                    <Picker.Item label="2 hours" value={240} />
+                    <Picker.Item label="2 hours" value={120} />
                 </Picker>
             </View>
             <Button 
