@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import {v4 as uuid} from 'uuid';
 
-
 const Form = (props) => {
     const submitCallback = props.callback;
 

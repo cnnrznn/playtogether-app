@@ -4,8 +4,13 @@ import Games from './components/game-list';
 
 export default function App() {
 
-  function formCallback(obj) {
-    console.log(obj);
+  function formCallback(result) {
+    if (!result.location) {
+      alert("Need a location");
+      return;
+    }
+
+    console.log(result);
   }
 
   return (
