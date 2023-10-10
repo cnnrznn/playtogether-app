@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import Form from './components/playform';
 import Games from './components/game-list';
 
@@ -14,10 +14,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Form callback={formCallback} />
       <Games />
-    </View>
+    </ScrollView>
   );
 }
 
