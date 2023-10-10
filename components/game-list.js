@@ -8,8 +8,7 @@ export default function Games ({id}) {
     useEffect(() => {
         async function fetchGames() {
             try {
-                const resp = await fetch(`http://localhost:8080/games?id=${id}`, {
-                });
+                const resp = await fetch(`http://localhost:8080/games?id=${id}`);
                 console.log(resp);
                 const json = await resp.json();
                 setGames(json.payload);
@@ -17,7 +16,6 @@ export default function Games ({id}) {
                 console.log(error);
             }
         }
-        fetchGames();
         const interval = setInterval(() => {fetchGames()}, 5000);
         return () => { clearInterval(interval) };
     });
@@ -26,7 +24,6 @@ export default function Games ({id}) {
 
     return (
         <View>
-
         </View>
     );
 };
