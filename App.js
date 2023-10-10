@@ -11,6 +11,8 @@ export default function App() {
     }
 
     console.log(result);
+
+    // Fire off request to server and wait for UI to render
   }
 
   return (
