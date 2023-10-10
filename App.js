@@ -32,7 +32,7 @@ export default function App() {
           <Button onPress={changeUUID} title='Change UUID'/>
       </View>
       <Form callback={formCallback} />
-      <Games />
+      <Games id={id} />
     </ScrollView>
   );
 }

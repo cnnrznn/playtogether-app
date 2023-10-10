@@ -1,19 +1,30 @@
 import { View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-class Games extends React.Component {
+export default function Games ({id}) {
+    const [games, setGames] = useState([]);
+
     // Set up update function here
+    useEffect(() => {
+        async function fetchGames() {
+            try {
+                const resp = await fetch("localhost:8080/games?id=${id}");
+                const json = await resp.json();
+                setGames(json.payload);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchGames();
+        const interval = setInterval(() => {fetchGames}, 5000);
+        return () => { clearInterval(interval) };
+    });
 
     // Allow components to remotely update
 
-    
-    render() {
-        return (
-            <View>
+    return (
+        <View>
 
-            </View>
-        );
-    }
-}
-
-export default Games;
+        </View>
+    );
+};
