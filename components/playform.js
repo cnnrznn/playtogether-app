@@ -2,12 +2,9 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
 import Geolocation from '@react-native-community/geolocation';
-import {v4 as uuid} from 'uuid';
 
 const Form = (props) => {
     const submitCallback = props.callback;
-
-    const [id, setID] = useState(uuid());
 
     const [selectedActivity, setSelectedActivity] = useState("volleyball");
     const [selectedTime, setSelectedTime] = useState(60);
@@ -15,13 +12,6 @@ const Form = (props) => {
     const [lat, setLat] = useState();
     const [lon, setLon] = useState();
     const [location, setLocation] = useState();
-
-    // this is here for demo purposes
-    // in a release version a UUID would be generated once
-    // and stored on-device
-    function changeUUID() {
-        setID(uuid());
-    }
 
     function submitForm() {
         submitCallback({
@@ -50,13 +40,9 @@ const Form = (props) => {
     return (
         <View>
             <View style={styles.row}>
-                <Text>Lat: {lat}</Text>
-                <Text>Lon: {lon}</Text>
+                <Text style={styles.col}>Lat: {lat}</Text>
+                <Text style={styles.col}>Lon: {lon}</Text>
                 <Button onPress={GetLocation} title="Get Locatoin" />
-            </View>
-            <View style={styles.row}>
-                <Text>ID: {id}</Text>
-                <Button onPress={changeUUID} title='Change UUID'/>
             </View>
             <View style={styles.row} >
                 <Text style={styles.col}>Activity:</Text>
@@ -95,7 +81,6 @@ const styles = StyleSheet.create({
     col: {
         paddingEnd: 10,
     }
-
 });
 
 export default Form;
