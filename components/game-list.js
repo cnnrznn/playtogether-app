@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Games ({id}) {
     const [games, setGames] = useState([]);
@@ -8,7 +8,9 @@ export default function Games ({id}) {
     useEffect(() => {
         async function fetchGames() {
             try {
-                const resp = await fetch("localhost:8080/games?id=${id}");
+                const resp = await fetch(`http://localhost:8080/games?id=${id}`, {
+                });
+                console.log(resp);
                 const json = await resp.json();
                 setGames(json.payload);
             } catch (error) {
@@ -16,7 +18,7 @@ export default function Games ({id}) {
             }
         }
         fetchGames();
-        const interval = setInterval(() => {fetchGames}, 5000);
+        const interval = setInterval(() => {fetchGames()}, 5000);
         return () => { clearInterval(interval) };
     });
 
