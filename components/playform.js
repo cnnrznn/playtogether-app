@@ -15,6 +15,7 @@ const Form = (props) => {
 
     const [lat, setLat] = useState();
     const [lon, setLon] = useState();
+    const [location, setLocation] = useState();
 
     // this is here for demo purposes
     // in a release version a UUID would be generated once
@@ -29,6 +30,7 @@ const Form = (props) => {
             activity: selectedActivity,
             latitude: lat,
             longitude: lon,
+            location: location,
         });
     }
 
@@ -38,6 +40,7 @@ const Form = (props) => {
             console.log(position);
             setLat(position.coords.latitude);
             setLon(position.coords.longitude);
+            setLocation(position.coords);
             },
             (error) => {
             console.log(error);
@@ -50,7 +53,7 @@ const Form = (props) => {
             <View style={styles.row}>
                 <Text>Lat: {lat}</Text>
                 <Text>Lon: {lon}</Text>
-                <Button onPress={GetLocation} title="Get Locatin" />
+                <Button onPress={GetLocation} title="Get Locatoin" />
             </View>
             <View style={styles.row}>
                 <Text>ID: {id}</Text>
