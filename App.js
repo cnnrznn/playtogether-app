@@ -50,7 +50,9 @@ export default function App() {
           <Button onPress={changeUUID} title='Change UUID'/>
       </View>
       <Form callback={formCallback} />
-      <Games id={id} />
+      <View style={styles.games}>
+        <Games id={id} />
+      </View>
     </ScrollView>
   );
 }
@@ -69,5 +71,8 @@ const styles = StyleSheet.create({
   },
   col: {
     paddingEnd: 10,
+  },
+  games: {
+    marginTop: 30,
   }
 });
