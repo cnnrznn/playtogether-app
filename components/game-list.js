@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 export default function Games ({id}) {
@@ -8,15 +8,17 @@ export default function Games ({id}) {
     useEffect(() => {
         async function fetchGames() {
             try {
-                const resp = await fetch(`http://localhost:8080/games?id=${id}`);
-                console.log(resp);
+                const resp = await fetch(`http://localhost:8080/games?id=${id}`, {
+                    mode: 'cors',
+                });
                 const json = await resp.json();
+                console.log(json);
                 setGames(json.payload);
             } catch (error) {
                 console.log(error);
             }
         }
-        const interval = setInterval(() => {fetchGames()}, 5000);
+        const interval = setInterval(() => {fetchGames()}, 1000);
         return () => { clearInterval(interval) };
     });
 
@@ -24,6 +26,11 @@ export default function Games ({id}) {
 
     return (
         <View>
+            {
+                games.map(item => {
+                    return <Text key={item.id}>{JSON.stringify(item, null, 2)}</Text>
+                })
+            }
         </View>
     );
 };
