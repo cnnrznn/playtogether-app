@@ -20,9 +20,27 @@ export default function App() {
       return;
     }
 
-    console.log(result);
+    var body = {
+      player: id,
+      activity: result.activity,
+      lat: result.latitude,
+      lon: result.longitude,
+      expire: Math.round((new Date()).getTime() / 1000) + (60 * result.time),
+      range_km: 20,
+    }
 
     // Fire off request to server and wait for UI to render
+    fetch("http://localhost:8080/ping", {
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify(body),
+    }).then(value => {
+      value.json().then(data => {
+        console.log(data)
+      })
+    }).catch(reason => {
+      console.log(reason)
+    })
   }
 
   return (
