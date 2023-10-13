@@ -1,5 +1,6 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import Game from './game';
 
 export default function Games ({id}) {
     const [games, setGames] = useState([]);
@@ -28,7 +29,7 @@ export default function Games ({id}) {
         <View>
             {
                 games.map(item => {
-                    return <Text key={item.id}>{JSON.stringify(item, null, 2)}</Text>
+                    return <Game key={item.id} game={item} />
                 })
             }
         </View>
