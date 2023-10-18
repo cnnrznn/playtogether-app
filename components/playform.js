@@ -42,6 +42,7 @@ const Form = (props) => {
             <View style={styles.row}>
                 <Text style={styles.col}>Lat: {lat}</Text>
                 <Text style={styles.col}>Lon: {lon}</Text>
+                <Text style={styles.col}>Acc: {location?.accuracy}</Text>
                 <Button onPress={GetLocation} title="Get Location" />
             </View>
             <View style={styles.row} >
