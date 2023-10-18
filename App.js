@@ -21,18 +21,18 @@ export default function App() {
     }
 
     var body = {
-      player: id,
+      user: id,
       activity: result.activity,
       lat: result.latitude,
       lon: result.longitude,
-      expire: Math.round((new Date()).getTime() / 1000) + (60 * result.time),
+      start: Math.round((new Date()).getTime() / 1000),
+      end: Math.round((new Date()).getTime() / 1000) + (60 * result.time),
       range_km: 20,
     }
 
     // Fire off request to server and wait for UI to render
-    fetch("http://localhost:8080/ping", {
+    fetch("http://localhost:8080/play", {
       method: "POST",
-      mode: "cors",
       body: JSON.stringify(body),
     }).then(value => {
       value.json().then(data => {
