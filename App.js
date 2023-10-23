@@ -25,8 +25,9 @@ export default function App() {
       activity: result.activity,
       lat: result.latitude,
       lon: result.longitude,
-      start: Math.round((new Date()).getTime() / 1000),
-      end: Math.round((new Date()).getTime() / 1000) + (60 * result.time),
+      start: result.start,
+      end: result.end,
+      size: result.size,
       range_km: 20,
     }
 

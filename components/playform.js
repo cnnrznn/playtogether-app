@@ -9,15 +9,36 @@ const Form = (props) => {
     const submitCallback = props.callback;
 
     const [selectedActivity, setSelectedActivity] = useState("volleyball");
-    const [selectedTime, setSelectedTime] = useState(60);
+    const [startTime, setStartTime] = useState(0);
+    const [endTime, setEndTime] = useState(0);
+
+    const [size, setSize] = useState(1)
 
     const [lat, setLat] = useState();
     const [lon, setLon] = useState();
     const [location, setLocation] = useState();
 
     function submitForm() {
+        if (!startTime || !endTime) {
+            alert("Must choose start and end time")
+            return
+        }
+        if (endTime <= startTime) {
+            alert("End time must be after start time")
+            return
+        }
+
+        let start = new Date()
+        let end = new Date()
+        start.setHours(startTime, 0, 0, 0)
+        end.setHours(endTime, 0, 0, 0)
+
+        console.log(typeof(size))
+
         submitCallback({
-            time: selectedTime,
+            start: Math.round(start.getTime() / 1000),
+            end: Math.round(end.getTime() / 1000),
+            size: size,
             activity: selectedActivity,
             latitude: lat,
             longitude: lon,
@@ -39,7 +60,17 @@ const Form = (props) => {
         );
     }
 
-    console.log("Location: ", location !== undefined)
+    const currHour = new Date().getHours()
+    const pickerTimeList = Array(13)
+    for (let i=1; i < pickerTimeList.length; i++) {
+        pickerTimeList[i] = currHour + i -1;
+    }
+    pickerTimeList[0] = '';
+
+    const sizeList = Array(20);
+    for (let i=0; i<sizeList.length; i++) {
+        sizeList[i] = i+1;
+    }
 
     return (
         <View>
@@ -53,20 +84,44 @@ const Form = (props) => {
                 <Text style={styles.col}>Activity:</Text>
                 <Picker
                     selectedValue={selectedActivity}
-                    onValueChange={(activity, index) => setSelectedActivity(activity)} >
+                    onValueChange={(activity) => setSelectedActivity(activity)} >
                     <Picker.Item label="volleyball" value="volleyball" />
                     <Picker.Item label="run" value="run" />
                 </Picker>
             </View>
             <View style={styles.row} >
-                <Text style={styles.col}>Time:</Text>
+                <Text style={styles.col}># People:</Text>
                 <Picker
-                    selectedValue={selectedTime}
-                    onValueChange={(time, index) => setSelectedTime(time)} >
-                    <Picker.Item label="1 hour" value={60} />
-                    <Picker.Item label="2 hours" value={120} />
-                    <Picker.Item label="3 hours" value={180} />
-                    <Picker.Item label="4 hours" value={240} />
+                    selectedValue={size}
+                    onValueChange={val => { setSize(Number(val)) }} >
+                    {
+                        sizeList.map( (v, i) => {
+                            return <Picker.Item label={v} value={v} key={i} />
+                        })
+                    }
+                </Picker>
+            </View>
+            <View style={styles.row} >
+                <Text style={styles.col}>Start Hour:</Text>
+                <Picker
+                    style={styles.col}
+                    selectedValue={startTime}
+                    onValueChange={time => setStartTime(time)} >
+                    {
+                        pickerTimeList.map( (val, i) => {
+                            return <Picker.Item label={val} value={val} key={i} />
+                        })
+                    }
+                </Picker>
+                <Text style={styles.col}>End Hour:</Text>
+                <Picker
+                    selectedValue={endTime}
+                    onValueChange={time => setEndTime(time)} >
+                    {
+                        pickerTimeList.map((val, i) => {
+                            return <Picker.Item label={val} value={val} key={i} />
+                        })
+                    }
                 </Picker>
             </View>
             <Button 
@@ -85,7 +140,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     col: {
-        paddingEnd: 10,
+        marginEnd: 10,
     }
 });
 
