@@ -21,8 +21,8 @@ export default function Games ({id}) {
                             return {
                                 x: game.user,
                                 y: [
-                                    new Date(0).setUTCSeconds(game.start),
-                                    new Date(0).setUTCSeconds(game.end)
+                                    new Date(0).setSeconds(game.start),
+                                    new Date(0).setSeconds(game.end)
                                 ]
                             }
                         })
@@ -42,35 +42,40 @@ export default function Games ({id}) {
 
     return (
         <View>
-            <View style={styles.chart}>
-            <ApexChart
-                options={{
-                    chart: {
-                        toolbar: {
-                            show: false,
+            { games.length > 0 &&
+                <View style={styles.chart}>
+                <ApexChart
+                    options={{
+                        chart: {
+                            toolbar: {
+                                show: false,
+                            },
+                            type: 'rangeBar'
                         },
-                        type: 'rangeBar'
-                    },
-                    plotOptions: {
-                        bar: {
-                            horizontal: true
+                        plotOptions: {
+                            bar: {
+                                horizontal: true
+                            }
+                        },
+                        xaxis: {
+                            type: 'datetime',
+                            labels: {
+                                datetimeUTC: false,
+                            },
                         }
-                    },
-                    xaxis: {
-                        type: 'datetime'
-                    }
-                }}
-                series={chartSeries}
-                type="rangeBar"
-                />
-            </View>
-            {/*<View>
+                    }}
+                    series={chartSeries}
+                    type="rangeBar"
+                    />
+                </View>
+            }
+            {<View>
                 {
                     games.map(item => {
                         return <Game key={item.id} game={item} />
                     })
                 }
-            </View>*/}
+            </View>}
         </View>
     );
 };
