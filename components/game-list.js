@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import ApexChart from 'react-apexcharts';
 import Game from './game';
@@ -27,6 +27,8 @@ export default function Games ({id}) {
                             }
                         })
                     }])
+                } else {
+                    setChartSeries([])
                 }
             } catch (error) {
                 console.log(error);
@@ -40,10 +42,13 @@ export default function Games ({id}) {
 
     return (
         <View>
+            <View style={styles.chart}>
             <ApexChart
                 options={{
                     chart: {
-                        //height: 350,
+                        toolbar: {
+                            show: false,
+                        },
                         type: 'rangeBar'
                     },
                     plotOptions: {
@@ -58,13 +63,21 @@ export default function Games ({id}) {
                 series={chartSeries}
                 type="rangeBar"
                 />
-            <View>
+            </View>
+            {/*<View>
                 {
                     games.map(item => {
                         return <Game key={item.id} game={item} />
                     })
                 }
-            </View>
+            </View>*/}
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    chart: {
+        width: '100vw',
+        maxWidth: 1000,
+    }
+})
