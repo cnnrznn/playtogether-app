@@ -9,8 +9,8 @@ const Form = (props) => {
     const submitCallback = props.callback;
 
     const [selectedActivity, setSelectedActivity] = useState("volleyball");
-    const [startTime, setStartTime] = useState(0);
-    const [endTime, setEndTime] = useState(0);
+    const [startTime, setStartTime] = useState();
+    const [endTime, setEndTime] = useState();
 
     const [size, setSize] = useState(1)
 
@@ -32,8 +32,6 @@ const Form = (props) => {
         let end = new Date()
         start.setHours(startTime, 0, 0, 0)
         end.setHours(endTime, 0, 0, 0)
-
-        console.log(typeof(size))
 
         submitCallback({
             start: Math.round(start.getTime() / 1000),
@@ -63,7 +61,7 @@ const Form = (props) => {
     const currHour = new Date().getHours()
     const pickerTimeList = Array(13)
     for (let i=1; i < pickerTimeList.length; i++) {
-        pickerTimeList[i] = currHour + i -1;
+        pickerTimeList[i] = (currHour + i - 1) % 24
     }
     pickerTimeList[0] = '';
 

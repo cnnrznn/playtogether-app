@@ -21,8 +21,8 @@ export default function Games ({id}) {
                             return {
                                 x: game.user,
                                 y: [
-                                    new Date(0).setSeconds(game.start),
-                                    new Date(0).setSeconds(game.end)
+                                    new Date(0).setUTCSeconds(game.start),
+                                    new Date(0).setUTCSeconds(game.end)
                                 ]
                             }
                         })
@@ -72,7 +72,7 @@ export default function Games ({id}) {
             {<View>
                 {
                     games.map(item => {
-                        return <Game key={item.id} game={item} />
+                        return <Game key={item.user} game={item} />
                     })
                 }
             </View>}
