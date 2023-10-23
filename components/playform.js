@@ -61,9 +61,10 @@ const Form = (props) => {
     const currHour = new Date().getHours()
     const pickerTimeList = Array(13)
     for (let i=1; i < pickerTimeList.length; i++) {
-        pickerTimeList[i] = (currHour + i - 1) % 24
+        const hour = (currHour + i - 1)
+        pickerTimeList[i] = <Picker.Item label={hour % 24} value={hour} key={i} />
     }
-    pickerTimeList[0] = '';
+    pickerTimeList[0] = <Picker.Item label={''} value={undefined} key={0} />
 
     const sizeList = Array(20);
     for (let i=0; i<sizeList.length; i++) {
@@ -105,21 +106,13 @@ const Form = (props) => {
                     style={styles.col}
                     selectedValue={startTime}
                     onValueChange={time => setStartTime(time)} >
-                    {
-                        pickerTimeList.map( (val, i) => {
-                            return <Picker.Item label={val} value={val} key={i} />
-                        })
-                    }
+                    { pickerTimeList }
                 </Picker>
                 <Text style={styles.col}>End Hour:</Text>
                 <Picker
                     selectedValue={endTime}
                     onValueChange={time => setEndTime(time)} >
-                    {
-                        pickerTimeList.map((val, i) => {
-                            return <Picker.Item label={val} value={val} key={i} />
-                        })
-                    }
+                    { pickerTimeList }
                 </Picker>
             </View>
             <Button 
