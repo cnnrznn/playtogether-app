@@ -2,6 +2,8 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
 import Geolocation from '@react-native-community/geolocation';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Form = (props) => {
     const submitCallback = props.callback;
@@ -37,13 +39,15 @@ const Form = (props) => {
         );
     }
 
+    console.log("Location: ", location !== undefined)
+
     return (
         <View>
             <View style={styles.row}>
-                <Text style={styles.col}>Lat: {lat}</Text>
-                <Text style={styles.col}>Lon: {lon}</Text>
-                <Text style={styles.col}>Acc: {location?.accuracy}</Text>
-                <Button onPress={GetLocation} title="Get Location" />
+                <Button onPress={GetLocation}
+                        title="Get Location" />
+                {location !== undefined &&
+                    <FontAwesomeIcon icon={faCheck} />}
             </View>
             <View style={styles.row} >
                 <Text style={styles.col}>Activity:</Text>
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 10,
+        alignItems: 'center',
     },
     col: {
         paddingEnd: 10,
