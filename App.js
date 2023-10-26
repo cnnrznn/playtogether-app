@@ -37,7 +37,7 @@ export default function App() {
       body: JSON.stringify(body),
     }).then(value => {
       value.json().then(data => {
-        console.log(data)
+        //console.log(data)
       })
     }).catch(reason => {
       console.log(reason)
