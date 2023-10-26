@@ -47,7 +47,7 @@ const Form = (props) => {
     function GetLocation() {
         Geolocation.getCurrentPosition(
             (position) => {
-            console.log(position);
+            //console.log(position);
             setLat(position.coords.latitude);
             setLon(position.coords.longitude);
             setLocation(position.coords);
