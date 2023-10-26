@@ -86,10 +86,13 @@ export default function Games ({id}) {
                             enabled: false,
                         },
                         chart: {
+                            type: 'rangeBar',
                             toolbar: {
                                 show: false,
                             },
-                            type: 'rangeBar'
+                            zoom: {
+                                enabled: false,
+                            }
                         },
                         dataLabels: {
                             enabled: true,
@@ -170,7 +173,7 @@ export default function Games ({id}) {
 const styles = StyleSheet.create({
     chart: {
         width: '100vw',
-        maxWidth: 1000,
+        maxWidth: 720,
     },
     gameon: {
         alignSelf: 'center',
